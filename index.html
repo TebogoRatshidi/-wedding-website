@@ -4,37 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Website</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        nav { background-color: #333; color: #fff; padding: 15px; }
+        nav a { color: #fff; margin: 0 15px; text-decoration: none; }
+        section { padding: 20px; }
+        #seatingFind { display: none; }
+    </style>
+    <script>
+        function findSeating() {
+            const name = document.getElementById('guestName').value;
+            const seatingChart = {
+                'Alice': 'Table 1',
+                'Bob': 'Table 2',
+                'Charlie': 'Table 3'
+            };
+            const result = seatingChart[name] || 'Not Found';
+            document.getElementById('seatingResult').innerText = result;
+            document.getElementById('seatingFind').style.display = 'block';
+        }
+    </script>
 </head>
 <body>
-    <div id="root"></div>
-    <script>
-        const Home = () => <div><h1 className='text-3xl'>Welcome to Our Wedding!</h1><p className='text-lg'>We're excited to celebrate with you.</p></div>;
-        const About = () => <div><h1 className='text-3xl'>About Us</h1><p className='text-lg'>We are a couple who can't wait to tie the knot!</p></div>;
-        const Seats = () => <div><h1 className='text-3xl'>Seating Arrangements</h1><p className='text-lg'>Find your seat for the ceremony here.</p></div>;
-        const Menu = () => <div><h1 className='text-3xl'>Menu</h1><p className='text-lg'>Check out the delicious food we have planned for you!</p></div>;
-
-        const App = () => {
-            return (
-                <div className='flex flex-col items-center justify-center min-h-screen'>
-                    <nav className='bg-gray-800 text-white w-full p-4'>
-                        <a href="#" className='p-2'>Home</a>
-                        <a href="#about" className='p-2'>About</a>
-                        <a href="#seats" className='p-2'>Seats</a>
-                        <a href="#menu" className='p-2'>Menu</a>
-                    </nav>
-                    <section className='p-4'>
-                        <div id="content">
-                            <Home />
-                        </div>
-                    </section>
-                </div>
-            );
-        };
-
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#menu">Menu</a>
+        <a href="#seating">Seating Finder</a>
+    </nav>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Once upon a time, there were two souls destined to be together...</p>
+    </section>
+    <section id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li>Appetizer: Spring Rolls</li>
+            <li>Main Course: Grilled Salmon</li>
+            <li>Dessert: Chocolate Cake</li>
+        </ul>
+    </section>
+    <section id="seating">
+        <h2>Seating Finder</h2>
+        <input type="text" id="guestName" placeholder="Enter your name"/>
+        <button onclick="findSeating()">Find Seating</button>
+        <div id="seatingFind">
+            <p>Your seating is: <span id="seatingResult"></span></p>
+        </div>
+    </section>
 </body>
 </html>
